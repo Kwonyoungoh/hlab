@@ -229,12 +229,12 @@ resource "aws_alb_listener" "hlab" {
 
 ############################################################
 
-#4. 볼륨
-
+# 과제 3번
+# 4. 볼륨
 # ebs 볼륨생성
 resource "aws_ebs_volume" "hlab_ebs" {
   availability_zone = aws_instance.hlab_instance.availability_zone
-  size = 2048
+  size = 5120
 
   tags = {
     Name = "${var.project_name}-ebs"

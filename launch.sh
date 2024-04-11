@@ -6,6 +6,9 @@ sudo dnf install -y nginx
 # 웹서버 실행
 sudo systemctl enable --now nginx
 
+############################################################
+
+# 과제 3번
 # 드라이브 식별자 설정
 DRIVE=/dev/xvdh
 MOUNT_POINT="/hlab"
