@@ -128,7 +128,7 @@ resource "aws_instance" "hlab_instance" {
   }
 }
 
-# 80포트 통신을 위한 보안 그룹 생성 및 규칙 작성
+# 보안그룹 생성 및 소스 보안그룹 추가
 resource "aws_security_group" "hlab_instance_sg" {
   name = "${var.project_name}-instance-sg"
   vpc_id = aws_vpc.hlab_vpc.id
@@ -143,7 +143,6 @@ resource "aws_security_group_rule" "instance_http_in" {
   from_port         = 80
   to_port           = 80
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.hlab_instance_sg.id
   source_security_group_id = aws_security_group.alb_sg.id
 }
@@ -169,7 +168,7 @@ resource "aws_lb" "hlab_alb" {
     security_groups = [aws_security_group.alb_sg.id]
     subnets = [ for subnet in aws_subnet.public : subnet.id ]
 
-    enable_deletion_protection = true
+    enable_deletion_protection = false
 }
 
 # 80포트 통신을 위한 보안 그룹 생성 및 규칙 작성
@@ -226,4 +225,25 @@ resource "aws_alb_listener" "hlab" {
         type = "forward"
         target_group_arn = aws_alb_target_group.hlab_alb_tg.arn
     }
+}
+
+############################################################
+
+#4. 볼륨
+
+# ebs 볼륨생성
+resource "aws_ebs_volume" "hlab_ebs" {
+  availability_zone = aws_instance.hlab_instance.availability_zone
+  size = 2048
+
+  tags = {
+    Name = "${var.project_name}-ebs"
+  }
+}
+
+# 볼륨 연결
+resource "aws_volume_attachment" "hlab_ebs" {
+  device_name = "/dev/xvdh"
+  volume_id = aws_ebs_volume.hlab_ebs.id
+  instance_id = aws_instance.hlab_instance.id
 }
