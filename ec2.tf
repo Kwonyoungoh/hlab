@@ -17,6 +17,7 @@ resource "aws_instance" "hlab_instance" {
   }
 }
 
+# 80포트 통신을 위한 보안 그룹 생성 및 규칙 작성
 resource "aws_security_group" "hlab_instance_sg" {
   name = "${var.project_name}-instance-sg"
   vpc_id = aws_vpc.hlab_vpc.id

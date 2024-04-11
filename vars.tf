@@ -1,3 +1,8 @@
+variable "project_name" {
+  type = string
+  description = "Project_name"
+}
+
 variable "aws_region" {
   type    = string
   description = "The AWS region to deploy resources into"
@@ -6,11 +11,6 @@ variable "aws_region" {
 variable "vpc_cidr" {
   type    = string
   description = "CIDR block for the VPC"
-}
-
-variable "project_name" {
-  type = string
-  description = "project_name"
 }
 
 variable "private_subnet_cidrs" {
@@ -25,12 +25,12 @@ variable "public_subnet_cidrs" {
 
 variable "iam_access_key" {
   type = string
-  description = "Private key for Authentication."
+  description = "Access key for Authentication."
 }
 
 variable "iam_secret_key" {
   type = string
-  description = "Private key for Authentication."
+  description = "Secret key for Authentication."
 }
 
 variable "azs" {
