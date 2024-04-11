@@ -13,6 +13,11 @@ variable "project_name" {
   description = "project_name"
 }
 
+variable "private_subnet_cidrs" {
+  type    = list(string)
+  description = "List of CIDR blocks for the private subnets"
+}
+
 variable "public_subnet_cidrs" {
   type    = list(string)
   description = "List of CIDR blocks for the public subnets"
