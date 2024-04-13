@@ -1,4 +1,4 @@
-# H-Lab 과제 3번
+# H-Lab 과제
 
 ## Diagram
 
