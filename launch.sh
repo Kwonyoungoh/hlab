@@ -38,7 +38,7 @@ done
 # parted를 사용하여 GPT 레이블 생성
 sudo parted $DRIVE --script mklabel gpt
 
-# 파티션 생성 (파티션 타입: xfs, 전체 드라이브 사용)
+# 파티션 생성 (파일 시스템: xfs, 전체 드라이브 사용)
 sudo parted $DRIVE --script unit TB mkpart primary xfs 0 100%
 
 # 파티션 포멧
@@ -47,7 +47,7 @@ sudo mkfs.xfs ${DRIVE}1
 # 마운트 포인트 생성
 sudo mkdir -p $MOUNT_POINT
 
-# 파일 시스템 마운트
+# 마운트
 sudo mount ${DRIVE}1 $MOUNT_POINT
 
 # 권한 부여
